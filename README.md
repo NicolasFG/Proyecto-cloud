@@ -43,10 +43,11 @@ Para exponer la API de manera segura y gestionada, se utilizó Azure API Managem
 ## Experimentaciones
 Se utilizó JMeter para realizar pruebas de carga en la API con el objetivo de evaluar su rendimiento y capacidad de escalabilidad. JMeter es una herramienta de código abierto diseñada para probar el rendimiento de aplicaciones web. Nos permitió simular múltiples usuarios concurrentes enviando solicitudes a la API, lo que ayudó a identificar cómo se comporta la API bajo alta demanda. Estas pruebas son cruciales para garantizar que la API pueda manejar situaciones de carga pesada sin fallar y para identificar cuellos de botella en el rendimiento.
 
+## Configuración de JMeter
+La configuración de JMeter se estableció para simular 100 hilos (usuarios virtuales) que se incrementan durante un período de 10 segundos. Esto se logró configurando el "Número de Hilos" en 100 y el "Período de Subida" en 10 segundos. Esta configuración fue elegida para generar una carga significativa sobre la API en un corto período de tiempo, lo que permite observar cómo se comporta la API bajo estrés y si puede manejar el incremento repentino en la demanda. Además, el "Contador del Bucle" se configuró en 100 para que cada hilo realice múltiples iteraciones, simulando un uso continuo de la API.
 
 ### KEDA
-KEDA (Kubernetes-based Event Driven Autoscaling) se implementó para permitir la escalabilidad horizontal de la API basada en eventos. KEDA permite escalar los pods automáticamente en respuesta a la demanda de la aplicación.
-
+KEDA (Kubernetes-based Event Driven Autoscaling) se implementó para permitir la escalabilidad horizontal de la API basada en eventos. KEDA permite escalar los pods automáticamente en respuesta a la demanda de la aplicación. Para configurar KEDA, se creó un objeto escalado (ScaledObject) en el que se especificaron los parámetros de escalabilidad. La configuración incluyó el intervalo de sondeo de 30 segundos y un período de recuperación de 300 segundos, con un mínimo de 2 réplicas y un máximo de 100 réplicas. 
 
 
 ![](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/Jmeter1.PNG)
