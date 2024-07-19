@@ -14,7 +14,19 @@ La API fue desarrollada inicialmente en Python. Su propósito es manejar solicit
 Se creó un Dockerfile para contenerizar la aplicación. Esto permitió que la API se ejecute de manera aislada y replicable en cualquier entorno. Se configuro el siguiente DockerFile.
 
 ```Dockerfile
+FROM python:3.9-slim
 
+WORKDIR /app
+
+COPY requirements.txt /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /app
+
+EXPOSE 8000
+
+CMD ["python", "app.py"]
 ```
 ### Azure Container Registry
 El contenedor Docker se subió a Azure Container Registry (ACR), que permite almacenar y administrar imágenes de contenedores en un registro privado.
