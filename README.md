@@ -30,38 +30,52 @@ CMD ["python", "app.py"]
 ```
 ### Azure Container Registry
 El contenedor Docker se subió a Azure Container Registry (ACR), que permite almacenar y administrar imágenes de contenedores en un registro privado.
-
+![Container](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/containerazure.PNG)
 
 ### Kubernetes 
-El contenedor Docker se subió a Azure Container Registry (ACR), que permite almacenar y administrar imágenes de contenedores en un registro privado.
+El contenedor Docker se desplegó en un clúster de Kubernetes en Azure Kubernetes Service (AKS). Se utilizaron despliegues y servicios para gestionar los pods y exponer la API.
+![Kubernetes](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/kubernetesazure.PNG)
 
 ### Azure API Management
 Para exponer la API de manera segura y gestionada, se utilizó Azure API Management, proporcionando un endpoint HTTPS y otras funcionalidades de gestión.
+![APIM](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/APIMazure.PNG)
 
 ## Experimentaciones
+Se utilizó JMeter para realizar pruebas de carga en la API con el objetivo de evaluar su rendimiento y capacidad de escalabilidad. JMeter es una herramienta de código abierto diseñada para probar el rendimiento de aplicaciones web. Nos permitió simular múltiples usuarios concurrentes enviando solicitudes a la API, lo que ayudó a identificar cómo se comporta la API bajo alta demanda. Estas pruebas son cruciales para garantizar que la API pueda manejar situaciones de carga pesada sin fallar y para identificar cuellos de botella en el rendimiento.
+
 
 ### KEDA
 KEDA (Kubernetes-based Event Driven Autoscaling) se implementó para permitir la escalabilidad horizontal de la API basada en eventos. KEDA permite escalar los pods automáticamente en respuesta a la demanda de la aplicación.
 
+
+
+![](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/Jmeter1.PNG)
+
+
+
 Sin KEDA
 La primera gráfica muestra el comportamiento de la API sin KEDA implementado. Cuando la API fue estresada, colapsó a los 3 segundos, como se observa en las gráficas de uso de CPU y memoria, así como en el recuento de pods activos.
 
+![](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/test1.1.PNG)
 
-Uso de CPU: Se observa un pico que colapsa rápidamente.
-Uso de Memoria: Muestra una carga constante que no pudo soportar.
-Recuento de Pods Activos: Muestra un incremento en los pods con errores.
+* Uso de CPU: Se observa un pico que colapsa rápidamente, indicando que la carga era demasiado alta para ser manejada por los recursos disponibles.
+* Uso de Memoria: La memoria muestra una carga constante que no pudo soportar, lo que llevó a un fallo en la aplicación.
+* Recuento de Pods Activos: Muestra un incremento en los pods con errores, ya que los recursos no pudieron escalar adecuadamente para manejar la carga.
 
 
 Con KEDA
-La segunda gráfica muestra la mejora después de implementar KEDA. La API pudo manejar la carga durante 7 segundos antes de fallar, evidenciando una mejora en la escalabilidad.
+![](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/test2.PNG)
 
+La segunda gráfica muestra una mejora significativa después de implementar KEDA. La API pudo manejar la carga durante 7 segundos antes de fallar, lo que evidencia una mejora en la escalabilidad. Esto demuestra que con KEDA, los recursos pueden escalar dinámicamente en respuesta a la demanda, mejorando el rendimiento general y la estabilidad de la API.
 
-Uso de CPU: Se mantiene más estable con un pico sostenido.
-Uso de Memoria: Mejora en la gestión de la carga.
-Recuento de Pods Activos: Se observa una mejor distribución y manejo de los pods activos.
+![](https://github.com/NicolasFG/Proyecto-cloud/blob/main/back/test2.2.PNG)
 
+* Uso de CPU: Se mantiene más estable con un pico sostenido, indicando que la API pudo manejar la carga mejor gracias a la capacidad de escalado automático proporcionada por KEDA.
+* Uso de Memoria: Mejora en la gestión de la carga, evitando los fallos que se observaron sin KEDA.
+* Recuento de Pods Activos: Se observa una mejor distribución y manejo de los pods activos, con un menor número de errores gracias a la capacidad de escalar adecuadamente.
 
-
+## Conclusión
+La implementación de KEDA en el clúster de Kubernetes permitió una mejor escalabilidad de la API, como se evidencia en las pruebas de carga realizadas con JMeter y monitorizadas con las herramientas de Azure. Las pruebas demostraron que la API puede manejar incrementos significativos en la carga con una degradación mínima del rendimiento cuando se utilizan estrategias de escalabilidad adecuadas. Esto asegura que la API sea robusta y esté preparada para entornos de producción con demandas variables.
 
 
 
