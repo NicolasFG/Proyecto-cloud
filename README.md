@@ -1,4 +1,36 @@
 # Proyecto-cloud
+## Configuración Frontend
+### Características
+- **Lenguaje:** JavaScript
+- **Framework:** React
+
+## Comandos iniciales
+Primero creamos el proyecto de React.
+
+``` bash
+npx create-react-app modelo-recomendacion-productos
+```
+
+Después, accedemos a la página de Firebase para crear una cuenta. A continuación, creamos un nuevo proyecto en la consola de Firebase, lo que nos permitirá utilizar todas las funcionalidades que ofrece la plataforma. Aquí podremos incializar las funcionalidades de Hosting y Authentication.
+
+## Hosting
+El host elegido para nuetsra web es Firebase Hosting porque es gratuito y permite monitorear el tráfico que recibe una web en tiempo real.
+
+![imagen1](https://github.com/user-attachments/assets/7361b9bb-387b-47f7-939b-7bd442c78261)
+
+Además incluye un dominio personalizable.
+
+![imagen2](https://github.com/user-attachments/assets/4ceaeee5-2a45-46d0-9f12-1fee5780a529)
+
+## Configuración de Firebase
+Agregamos el apikey entre otras llaves necesarias para manejar el registro de los usuarios y el acceso por medio del Login.
+
+![imagen4](https://github.com/user-attachments/assets/0e2789a7-5c39-451b-8404-1717ee2f71d2)
+
+## Firebase Auth
+Configuramos Firebase Auth por medio de un correo electrónico para crear un token único para cada usuario registrado.
+
+![imagen3](https://github.com/user-attachments/assets/0f837312-fe63-4595-9cd5-58f2277a60c5)
 
 ## API Recomendaciones
 La API fue desarrollada inicialmente en Python. Su propósito es manejar solicitudes HTTP de manera eficiente y escalable.
