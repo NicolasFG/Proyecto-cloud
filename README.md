@@ -32,6 +32,7 @@ Configuramos Firebase Auth por medio de un correo electrónico para crear un tok
 
 ![imagen3](https://github.com/user-attachments/assets/0f837312-fe63-4595-9cd5-58f2277a60c5)
 
+## Configuración Backend
 ## API Recomendaciones
 La API fue desarrollada inicialmente en Python. Su propósito es manejar solicitudes HTTP de manera eficiente y escalable.
 
